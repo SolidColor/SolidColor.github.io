@@ -97,6 +97,7 @@
             display: flex;
             gap: 0.5rem;
             margin: 0 1rem;
+            align-items: center;
         }
 
         .color-btn {
@@ -128,6 +129,64 @@
             height: 10px;
             background: rgba(255, 255, 255, 0.9);
             border-radius: 50%;
+        }
+
+        /* 自定义颜色选择器样式 */
+        .custom-color {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+        }
+
+        .custom-color-btn {
+            width: 24px;
+            height: 24px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: linear-gradient(45deg, #ff0000, #00ff00, #0000ff);
+            position: relative;
+        }
+
+        .custom-color-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .custom-color-input {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .custom-color.active .custom-color-btn {
+            border-color: rgba(255, 255, 255, 0.9);
+            transform: scale(1.1);
+        }
+
+        .custom-color.active .custom-color-btn::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+        }
+
+        /* 分隔线 */
+        .color-divider {
+            width: 1px;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.3);
+            margin: 0 0.5rem;
         }
 
         /* 全屏时隐藏底部栏 */
@@ -179,6 +238,12 @@
                 <button class="color-btn" data-color="#34495e" style="background-color: #34495e;" title="深蓝"></button>
                 <button class="color-btn" data-color="#ffffff" style="background-color: #ffffff;" title="白色"></button>
                 <button class="color-btn" data-color="#000000" style="background-color: #000000;" title="黑色"></button>
+                <div class="color-divider"></div>
+                <div class="custom-color" title="自定义颜色">
+                    <div class="custom-color-btn">
+                        <input type="color" class="custom-color-input" id="customColorInput" value="#3498db">
+                    </div>
+                </div>
             </div>
             <div class="lang-switch">
                 <button class="lang-btn active" data-switch-lang="zh">中</button>
@@ -218,20 +283,45 @@
         document.querySelectorAll('.color-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const color = btn.dataset.color;
-                
-                // 更新背景颜色
-                document.body.style.backgroundColor = color;
+                updateColor(color);
                 
                 // 更新按钮状态
-                document.querySelectorAll('.color-btn').forEach(b => {
-                    b.classList.toggle('active', b === btn);
+                document.querySelectorAll('.color-btn, .custom-color').forEach(b => {
+                    b.classList.remove('active');
                 });
-
-                // 根据背景色调整文字颜色
-                const isDark = isColorDark(color);
-                document.body.style.color = isDark ? '#fff' : '#000';
+                btn.classList.add('active');
             });
         });
+
+        // 自定义颜色功能
+        const customColorInput = document.getElementById('customColorInput');
+        const customColorBtn = customColorInput.parentElement.parentElement;
+
+        customColorInput.addEventListener('input', (e) => {
+            const color = e.target.value;
+            updateColor(color);
+            
+            // 更新按钮状态
+            document.querySelectorAll('.color-btn, .custom-color').forEach(b => {
+                b.classList.remove('active');
+            });
+            customColorBtn.classList.add('active');
+        });
+
+        customColorInput.addEventListener('change', (e) => {
+            const color = e.target.value;
+            updateColor(color);
+        });
+
+        // 更新颜色的通用函数
+        function updateColor(color) {
+            // 更新背景颜色
+            document.body.style.backgroundColor = color;
+            
+            // 根据背景色调整文字颜色
+            const isDark = isColorDark(color);
+            document.body.style.color = isDark ? '#fff' : '#000';
+        }
 
         // 判断颜色是否为深色
         function isColorDark(color) {
