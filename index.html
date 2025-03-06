@@ -17,6 +17,7 @@
             display: flex;
             flex-direction: column;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            transition: background-color 0.3s ease;
         }
 
         .footer {
@@ -55,7 +56,6 @@
         .lang-switch {
             display: flex;
             gap: 0.5rem;
-            margin-left: 1rem;
         }
 
         .lang-btn, .fullscreen-btn {
@@ -92,6 +92,44 @@
             gap: 1rem;
         }
 
+        /* 颜色选择器样式 */
+        .color-switch {
+            display: flex;
+            gap: 0.5rem;
+            margin: 0 1rem;
+        }
+
+        .color-btn {
+            width: 24px;
+            height: 24px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .color-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .color-btn.active {
+            border-color: rgba(255, 255, 255, 0.9);
+            transform: scale(1.1);
+        }
+
+        .color-btn.active::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+        }
+
         /* 全屏时隐藏底部栏 */
         :fullscreen .footer {
             opacity: 0;
@@ -111,14 +149,15 @@
                 gap: 0.5rem;
             }
             
-            .lang-switch {
-                margin-left: 0;
-            }
-
             .controls {
                 flex-direction: row;
                 width: 100%;
                 justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .lang-switch, .color-switch {
+                margin: 0;
             }
         }
     </style>
@@ -131,6 +170,16 @@
             <span data-lang="en">Visit <a href="https://github.com/SolidColor/SolidColor.github.io" target="_blank">GitHub</a> for more solid color backgrounds</span>
         </div>
         <div class="controls">
+            <div class="color-switch">
+                <button class="color-btn active" data-color="#3498db" style="background-color: #3498db;" title="蓝色"></button>
+                <button class="color-btn" data-color="#2ecc71" style="background-color: #2ecc71;" title="绿色"></button>
+                <button class="color-btn" data-color="#e74c3c" style="background-color: #e74c3c;" title="红色"></button>
+                <button class="color-btn" data-color="#f1c40f" style="background-color: #f1c40f;" title="黄色"></button>
+                <button class="color-btn" data-color="#9b59b6" style="background-color: #9b59b6;" title="紫色"></button>
+                <button class="color-btn" data-color="#34495e" style="background-color: #34495e;" title="深蓝"></button>
+                <button class="color-btn" data-color="#ffffff" style="background-color: #ffffff;" title="白色"></button>
+                <button class="color-btn" data-color="#000000" style="background-color: #000000;" title="黑色"></button>
+            </div>
             <div class="lang-switch">
                 <button class="lang-btn active" data-switch-lang="zh">中</button>
                 <button class="lang-btn" data-switch-lang="ja">日</button>
@@ -164,6 +213,35 @@
                 document.documentElement.lang = lang;
             });
         });
+
+        // 颜色切换功能
+        document.querySelectorAll('.color-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const color = btn.dataset.color;
+                
+                // 更新背景颜色
+                document.body.style.backgroundColor = color;
+                
+                // 更新按钮状态
+                document.querySelectorAll('.color-btn').forEach(b => {
+                    b.classList.toggle('active', b === btn);
+                });
+
+                // 根据背景色调整文字颜色
+                const isDark = isColorDark(color);
+                document.body.style.color = isDark ? '#fff' : '#000';
+            });
+        });
+
+        // 判断颜色是否为深色
+        function isColorDark(color) {
+            const hex = color.replace('#', '');
+            const r = parseInt(hex.substr(0, 2), 16);
+            const g = parseInt(hex.substr(2, 2), 16);
+            const b = parseInt(hex.substr(4, 2), 16);
+            const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+            return brightness < 128;
+        }
 
         // 全屏功能
         const fullscreenBtn = document.getElementById('fullscreenBtn');
