@@ -30,7 +30,7 @@
             color: rgba(255, 255, 255, 0.9);
             text-align: center;
             font-size: 0.9rem;
-            transition: opacity 0.3s;
+            transition: all 0.3s;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -58,7 +58,7 @@
             margin-left: 1rem;
         }
 
-        .lang-btn {
+        .lang-btn, .fullscreen-btn {
             background: none;
             border: 1px solid rgba(255, 255, 255, 0.3);
             color: white;
@@ -69,7 +69,7 @@
             transition: all 0.2s;
         }
 
-        .lang-btn:hover {
+        .lang-btn:hover, .fullscreen-btn:hover {
             background: rgba(255, 255, 255, 0.1);
         }
 
@@ -86,6 +86,23 @@
             display: inline;
         }
 
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* 全屏时隐藏底部栏 */
+        :fullscreen .footer {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        :fullscreen .footer:hover {
+            opacity: 1;
+            pointer-events: all;
+        }
+
         @media (max-width: 768px) {
             .footer {
                 font-size: 0.8rem;
@@ -97,6 +114,12 @@
             .lang-switch {
                 margin-left: 0;
             }
+
+            .controls {
+                flex-direction: row;
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -107,14 +130,22 @@
             <span data-lang="ja">より多くの単色背景は <a href="https://github.com/SolidColor/SolidColor.github.io" target="_blank">GitHub</a> でご覧いただけます</span>
             <span data-lang="en">Visit <a href="https://github.com/SolidColor/SolidColor.github.io" target="_blank">GitHub</a> for more solid color backgrounds</span>
         </div>
-        <div class="lang-switch">
-            <button class="lang-btn active" data-switch-lang="zh">中</button>
-            <button class="lang-btn" data-switch-lang="ja">日</button>
-            <button class="lang-btn" data-switch-lang="en">En</button>
+        <div class="controls">
+            <div class="lang-switch">
+                <button class="lang-btn active" data-switch-lang="zh">中</button>
+                <button class="lang-btn" data-switch-lang="ja">日</button>
+                <button class="lang-btn" data-switch-lang="en">En</button>
+            </div>
+            <button class="fullscreen-btn" id="fullscreenBtn" title="全屏">
+                <span data-lang="zh" class="active">全屏</span>
+                <span data-lang="ja">全画面</span>
+                <span data-lang="en">Fullscreen</span>
+            </button>
         </div>
     </footer>
 
     <script>
+        // 语言切换功能
         document.querySelectorAll('.lang-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const lang = btn.dataset.switchLang;
@@ -132,6 +163,32 @@
                 // 更新 HTML lang 属性
                 document.documentElement.lang = lang;
             });
+        });
+
+        // 全屏功能
+        const fullscreenBtn = document.getElementById('fullscreenBtn');
+        
+        // 切换全屏
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log(`全屏请求失败: ${err.message}`);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        // 全屏按钮点击事件
+        fullscreenBtn.addEventListener('click', toggleFullScreen);
+
+        // ESC 键退出全屏的提示已经由浏览器原生提供
+        // 监听全屏变化
+        document.addEventListener('fullscreenchange', () => {
+            const isFullscreen = document.fullscreenElement !== null;
+            fullscreenBtn.style.background = isFullscreen ? 'rgba(255, 255, 255, 0.2)' : 'none';
         });
     </script>
 </body>
