@@ -3,7 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>纯色背景 - SolidColor</title>
+    <title>纯色背景生成器 - SolidColor | 简单优雅的纯色背景</title>
+    
+    <!-- SEO Meta 标签 -->
+    <meta name="description" content="SolidColor 是一个简单优雅的纯色背景生成工具，支持自定义颜色、一键复制颜色代码、全屏预览等功能。适合设计师、演讲者和壁纸爱好者使用。">
+    <meta name="keywords" content="纯色背景,背景颜色,设计工具,壁纸生成器,颜色选择器,全屏背景">
+    <meta name="author" content="SolidColor">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta 标签 -->
+    <meta property="og:title" content="纯色背景生成器 - SolidColor">
+    <meta property="og:description" content="一个简单优雅的纯色背景生成工具，支持自定义颜色、一键复制颜色代码、全屏预览等功能。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://solidcolor.github.io">
+    <meta property="og:image" content="https://solidcolor.github.io/preview.png">
+    
+    <!-- Twitter Card Meta 标签 -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="纯色背景生成器 - SolidColor">
+    <meta name="twitter:description" content="一个简单优雅的纯色背景生成工具，支持自定义颜色、一键复制颜色代码、全屏预览等功能。">
+    <meta name="twitter:image" content="https://solidcolor.github.io/preview.png">
+    
+    <!-- 多语言支持 -->
+    <link rel="alternate" hreflang="zh" href="https://solidcolor.github.io/zh">
+    <link rel="alternate" hreflang="ja" href="https://solidcolor.github.io/ja">
+    <link rel="alternate" hreflang="en" href="https://solidcolor.github.io/en">
+    <link rel="canonical" href="https://solidcolor.github.io">
+    
+    <!-- PWA 支持 -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#3498db">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
     <style>
         * {
             margin: 0;
@@ -220,37 +253,74 @@
             }
         }
     </style>
+
+    <!-- 结构化数据 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "SolidColor 纯色背景生成器",
+        "description": "一个简单优雅的纯色背景生成工具，支持自定义颜色、一键复制颜色代码、全屏预览等功能。",
+        "url": "https://solidcolor.github.io",
+        "applicationCategory": "DesignApplication",
+        "operatingSystem": "All",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "SolidColor",
+            "url": "https://github.com/SolidColor"
+        }
+    }
+    </script>
 </head>
 <body>
-    <footer class="footer">
-        <div class="content">
-            <span data-lang="zh" class="active">访问 <a href="https://github.com/SolidColor/SolidColor.github.io" target="_blank">GitHub</a> 获取更多纯色背景</span>
-            <span data-lang="ja">より多くの単色背景は <a href="https://github.com/SolidColor/SolidColor.github.io" target="_blank">GitHub</a> でご覧いただけます</span>
-            <span data-lang="en">Visit <a href="https://github.com/SolidColor/SolidColor.github.io" target="_blank">GitHub</a> for more solid color backgrounds</span>
+    <!-- 主要内容区域 -->
+    <main class="main-content" role="main" aria-label="纯色背景显示区域">
+        <!-- 颜色信息显示 -->
+        <div class="color-info" role="status" aria-live="polite">
+            <div class="color-value"></div>
+            <div class="color-tip">
+                <span data-lang="zh" class="active">点击复制</span>
+                <span data-lang="ja">クリックでコピー</span>
+                <span data-lang="en">Click to copy</span>
+            </div>
         </div>
-        <div class="controls">
-            <div class="color-switch">
-                <button class="color-btn active" data-color="#3498db" style="background-color: #3498db;" title="蓝色"></button>
-                <button class="color-btn" data-color="#2ecc71" style="background-color: #2ecc71;" title="绿色"></button>
-                <button class="color-btn" data-color="#e74c3c" style="background-color: #e74c3c;" title="红色"></button>
-                <button class="color-btn" data-color="#f1c40f" style="background-color: #f1c40f;" title="黄色"></button>
-                <button class="color-btn" data-color="#9b59b6" style="background-color: #9b59b6;" title="紫色"></button>
-                <button class="color-btn" data-color="#34495e" style="background-color: #34495e;" title="深蓝"></button>
-                <button class="color-btn" data-color="#ffffff" style="background-color: #ffffff;" title="白色"></button>
-                <button class="color-btn" data-color="#000000" style="background-color: #000000;" title="黑色"></button>
-                <div class="color-divider"></div>
-                <div class="custom-color" title="自定义颜色">
+    </main>
+
+    <!-- 底部控制栏 -->
+    <footer class="footer" role="contentinfo">
+        <div class="content">
+            <span data-lang="zh" class="active">访问 <a href="https://github.com/SolidColor/SolidColor.github.io" target="_blank" rel="noopener noreferrer">GitHub</a> 获取更多纯色背景</span>
+            <span data-lang="ja">より多くの単色背景は <a href="https://github.com/SolidColor/SolidColor.github.io" target="_blank" rel="noopener noreferrer">GitHub</a> でご覧いただけます</span>
+            <span data-lang="en">Visit <a href="https://github.com/SolidColor/SolidColor.github.io" target="_blank" rel="noopener noreferrer">GitHub</a> for more solid color backgrounds</span>
+        </div>
+        <div class="controls" role="toolbar" aria-label="颜色和显示控制">
+            <div class="color-switch" role="group" aria-label="颜色选择">
+                <button class="color-btn active" data-color="#3498db" style="background-color: #3498db;" title="蓝色" aria-label="选择蓝色背景"></button>
+                <button class="color-btn" data-color="#2ecc71" style="background-color: #2ecc71;" title="绿色" aria-label="选择绿色背景"></button>
+                <button class="color-btn" data-color="#e74c3c" style="background-color: #e74c3c;" title="红色" aria-label="选择红色背景"></button>
+                <button class="color-btn" data-color="#f1c40f" style="background-color: #f1c40f;" title="黄色" aria-label="选择黄色背景"></button>
+                <button class="color-btn" data-color="#9b59b6" style="background-color: #9b59b6;" title="紫色" aria-label="选择紫色背景"></button>
+                <button class="color-btn" data-color="#34495e" style="background-color: #34495e;" title="深蓝" aria-label="选择深蓝背景"></button>
+                <button class="color-btn" data-color="#ffffff" style="background-color: #ffffff;" title="白色" aria-label="选择白色背景"></button>
+                <button class="color-btn" data-color="#000000" style="background-color: #000000;" title="黑色" aria-label="选择黑色背景"></button>
+                <div class="color-divider" role="separator"></div>
+                <div class="custom-color" title="自定义颜色" role="group" aria-label="自定义颜色选择">
                     <div class="custom-color-btn">
-                        <input type="color" class="custom-color-input" id="customColorInput" value="#3498db">
+                        <input type="color" class="custom-color-input" id="customColorInput" value="#3498db" aria-label="选择自定义颜色">
                     </div>
                 </div>
             </div>
-            <div class="lang-switch">
-                <button class="lang-btn active" data-switch-lang="zh">中</button>
-                <button class="lang-btn" data-switch-lang="ja">日</button>
-                <button class="lang-btn" data-switch-lang="en">En</button>
+            <div class="lang-switch" role="group" aria-label="语言选择">
+                <button class="lang-btn active" data-switch-lang="zh" aria-pressed="true">中</button>
+                <button class="lang-btn" data-switch-lang="ja" aria-pressed="false">日</button>
+                <button class="lang-btn" data-switch-lang="en" aria-pressed="false">En</button>
             </div>
-            <button class="fullscreen-btn" id="fullscreenBtn" title="全屏">
+            <button class="fullscreen-btn" id="fullscreenBtn" title="全屏" aria-label="切换全屏模式">
                 <span data-lang="zh" class="active">全屏</span>
                 <span data-lang="ja">全画面</span>
                 <span data-lang="en">Fullscreen</span>
@@ -359,5 +429,12 @@
             fullscreenBtn.style.background = isFullscreen ? 'rgba(255, 255, 255, 0.2)' : 'none';
         });
     </script>
+
+    <!-- 无障碍提示 -->
+    <div class="sr-only" aria-live="polite" role="status">
+        <span data-lang="zh" class="active">使用空格键切换全屏，C键复制颜色值</span>
+        <span data-lang="ja">スペースキーで全画面切替、Cキーでカラーコードをコピー</span>
+        <span data-lang="en">Use Space to toggle fullscreen, C to copy color code</span>
+    </div>
 </body>
 </html>
